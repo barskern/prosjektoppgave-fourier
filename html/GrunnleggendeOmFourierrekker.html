@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="grunnleggende-om-fourierrekker">Grunnleggende om Fourierrekker</h1>
+<h2 id="introduksjon-til-fourierrekker">Introduksjon til fourierrekker</h2>
+<p>En fourierrekke er en sum av harmoniske funksjoner med ulik frekvens og amplitude som er tilnærmet lik en periodisk funksjon. Med uendelig antall ledd i rekken så er fourierrekken til en funksjon lik funksjonen, men med en endelig mengde ledd så er fourierrekken tilnærmet lik funksjonen.</p>
+<p>Utregningen av fourierrekker kalles <em>harmonisk analyse</em>. Fourierrekken er svært nyttig, og kan brukes til å gjøre en tilfeldig periodisk funksjon om til en sum av enkle ledd. Man kan også velge antall ledd man ønsker basert på hvor nøyaktig man ønsker å gjennomføre tilnærmingen.</p>
+<h2 id="den-generaliserte-fourierrekken">Den generaliserte fourierrekken</h2>
+<p>Hvis vi bruker den <em>generaliserte<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></em> fourierrekken som benytter de ortogonale harmoniske funksjonene <em>sinus</em> og <em>cosinus</em> får vi at vi kan utlede fourierrekken til en funksjon ved hjelp av to koeffisienter, et konstant ledd og to summer gitt under. Hvis det er av interesse, så er utledningen av disse generaliserte formlene gjennomført av Eric W. Weisstein i sin artikkel om <a href="http://mathworld.wolfram.com/GeneralizedFourierSeries.html"><em>Generalized Fourier Series</em></a>.</p>
+<p>Anta at <span class="math inline">\(f(t)\)</span> en tilfeldig periodisk funksjon med periode <span class="math inline">\(T\)</span> og at <span class="math inline">\(c \in \mathbb{R}\)</span>. Da får vi at fourierrekken til funksjonen <span class="math inline">\(f(t)\)</span> er <span class="math inline">\(\psi(t)\)</span>.</p>
+<p><span class="math display">\[
+\psi(t) = \frac{a_0}{2} + \sum\limits_{n=1}^\infty \left(a_n \cos(n \omega t) + b_n \sin(n \omega t) \right)
+\]</span></p>
+<p><span class="math display">\[
+a_0 = \frac{2}{T} \int\limits_{c}^{c+T} f(t) \; dt
+\]</span></p>
+<p><span class="math display">\[
+a_n = \frac{2}{T} \int\limits_{c}^{c+T} f(t) \cdot \cos(n\omega t) \; dt
+\]</span></p>
+<p><span class="math display">\[
+b_n = \frac{2}{T} \int\limits_{c}^{c+T} f(t) \cdot \sin(n\omega t) \; dt
+\]</span></p>
+<p>Hvis <span class="math inline">\(f(t)\)</span> har diskontinuiteter, er fourierrekken til <span class="math inline">\(f(t)\)</span></p>
+<p><span class="math display">\[
+\psi(t) = \frac{f(t^+) + f(t^-)}{2}
+\]</span></p>
+<p>Dette vil også være sant <span class="math inline">\(t \in \mathbb{R}\)</span> når funksjonen er kontinuerlig, men da vi uttrykket kunne bli faktorisert til <span class="math inline">\(\psi(t) = f(t)\)</span>. Vi sier at <span class="math inline">\(f(t) \sim \psi(t)\)</span>.</p>
+<h2 id="den-komplekse-formen-for-fourierrekker">Den komplekse formen for fourierrekker</h2>
+<p>Fourierrekker består av to harmoniske funksjoner, <em>sinus</em> og <em>cosinus</em>. Ved hjelp av <em>eulers formel</em> kan vi gjøre disse om til et utrykk av <span class="math inline">\(e\)</span>. <em>Eulers formel</em> forteller oss at</p>
+<p><span class="math display">\[
+\cos(x) = \frac{e^{ix} + e^{-ix}}{2}\quad\quad\sin(x) = \frac{e^{ix} - e^{-ix}}{2i} \tag{1}
+\]</span></p>
+<p>Når vi setter <span class="math inline">\((1)\)</span> inn i formelen for fourierrekken, kan vi utlede den komplekse formen av fourierrekken.</p>
+<p><span class="math display">\[
+\begin{array}.\psi(t)
+&amp;= \frac{a_0}{2} + \sum\limits_{n=1}^\infty \left(a_n \cos(n \omega t) + b_n \sin(n \omega t) \right) \\
+&amp;= \frac{a_0}{2} + \sum\limits_{n=1}^\infty \left(a_n \frac{e^{in\omega t} + e^{-in\omega t}}{2} + b_n \frac{e^{in\omega t} - e^{-in\omega t}}{2i} \right) \\
+&amp;= \frac{a_0}{2} + \sum\limits_{n=1}^\infty \frac{a_n - ib_n}{2} e^{in\omega t} + \sum\limits_{n=1}^\infty \frac{a_n + ib_n}{2} e^{-in\omega t}\end{array} \tag{2}
+\]</span></p>
+<p>Får å kunne skrive fourierrekken på en enkel måte så gjør vi noen definisjoner.</p>
+<p><span class="math display">\[
+c_0 = \frac{a_0}{2} \\
+c_n = \frac{a_n - ib_n}{2} \\
+c_{-n} = \frac{a_n + ib_n}{2}
+\]</span></p>
+<p>Deretter setter vi disse definisjonene inn i uttrykket <span class="math inline">\((2)\)</span> som vi utledet over.</p>
+<p><span class="math display">\[
+\begin{array}. \psi(t) &amp;= \frac{a_0}{2} + \sum\limits_{n=1}^\infty \frac{a_n - ib_n}{2} e^{in\omega t} + \sum\limits_{n=1}^\infty \frac{a_n + ib_n}{2} e^{-in\omega t} \\
+&amp;= c_0 + \sum\limits_{n=1}^\infty c_n e^{in\omega t} + \sum\limits_{n=1}^\infty c_{-n} e^{-in\omega t} \\
+&amp;= \sum\limits_{n=-\infty}^\infty c_n e^{in\omega t}\end{array} \tag{3}
+\]</span></p>
+<p><span class="math display">\[
+c_n = \frac{1}{T} \int\limits_{c}^{c+T} f(t) e^{-jn\omega t} \; dt \tag{4}
+\]</span></p>
+<p>Resultatet <span class="math inline">\((3)\)</span> fra denne utledningen kalles den komplekse formen av fourierrekken<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>. Den komplekse formen for fourierrekker er algebraisk enklere og mer symmetrisk, derfor brukes denne formen av fourierrekker ofte i blant annet fysikk. For å komme rett fra funksjonen til den komplekse formen av fourierrekken kan vi bruke <span class="math inline">\((4)\)</span>.</p>
+<p>På den komplekse formen av fourierrekken så er det et teorem som heter Parsevals Teorem som er greit å ha sett. Hvis vi antar at <span class="math inline">\(f(t)\)</span> er en periodisk funksjon med en periode på <span class="math inline">\(T\)</span> og at <span class="math inline">\(c \in \mathbb{R}\)</span>.</p>
+<p><span class="math display">\[
+\frac{1}{T} \int\limits_{c}^{c+T} |f(t)|^2 \; dt = \sum\limits_{n=-\infty}^{\infty} |C_n|^2
+\]</span></p>
+<p>Hvis <span class="math inline">\(f(t)\)</span> er reell, altså at det ikke har en imaginær del, får vi videre at.</p>
+<p><span class="math display">\[
+\sum\limits_{n=-\infty}^{\infty} |C_n|^2 = |C_0|^2 + 2\sum\limits_{n=1}^{\infty} |C_n|^2
+\]</span></p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Weisstein, Eric W. &quot;Generalized Fourier Series.&quot; From MathWorld--A Wolfram Web Resource. <a href="http://mathworld.wolfram.com/GeneralizedFourierSeries.html" class="uri">http://mathworld.wolfram.com/GeneralizedFourierSeries.html</a> [Lesedato: 21.09.2017]<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>&quot;Complex form of fourier series&quot;, <a href="https://www.math24.net/complex-form-fourier-series/" class="uri">https://www.math24.net/complex-form-fourier-series/</a> [Lesedato: 21.09.2017]<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>
