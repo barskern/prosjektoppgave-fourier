@@ -45,10 +45,16 @@ Tittel: **En innføring i Fourierrekker**
 4. Grunnleggende om Fourierrekker
 5. Noen anvendelser av Fourierrekker (kort med noen eksempler)
 6. JPEG og Fourier
-    - Introduksjon og problemstilling
-    - Bruk av Fourierrekker i JPEG
-    - DCT vs DFT
-    - Analyse
-    - Konklusjon
+    - Introduksjon
+        - Introdusere at vi skal fremvise et bilde som en fourierrekke
+        - Introdusere JPEG
+    - Teori om å gjøre bilder om til fourierrekker
+        - Lett forklare hvordan JPEG gjennomfører det
+    - Problemstilling
+        - Fremstille et bilde som en eller flere fourierrekker
+    - Beslyende eksempler
+        - DCT vs DFT
+    - Framstilling
+    - Konklusjon - Forklaring
 7. Oppsummering
 8. Referanser
