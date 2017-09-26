@@ -5,7 +5,7 @@ En prosjektoppgave i INGP300 der vi skal arbeide med fourierrekker.
 
 ## Brainstorm
 
-- **Shazam**
+- ~~**Shazam**~~
 - **JPEG**
 - MP3
 - Gjennkjenning
@@ -39,12 +39,14 @@ Studenter med lite kunnskap om fourierrekker, men forståelse for Maple.
 
 Tittel: **En innføring i Fourierrekker**
 
-1. Forside
-2. Innholdsfortegnelse
-3. Introduksjon
-4. Grunnleggende om Fourierrekker
-5. Noen anvendelser av Fourierrekker (kort med noen eksempler)
-6. JPEG og Fourier
+Uferdig: &#10008;, Ferdig: &#10004;
+
+1. Forside &#10008;
+2. Innholdsfortegnelse &#10008;
+3. Introduksjon &#10008;
+4. Grunnleggende om Fourierrekker &#10004;
+5. Noen anvendelser av Fourierrekker (kort med noen eksempler) &#10008;
+6. JPEG og Fourier &#10008;
     - Introduksjon
         - Introdusere at vi skal fremvise et bilde som en fourierrekke
         - Introdusere JPEG
@@ -56,5 +58,5 @@ Tittel: **En innføring i Fourierrekker**
         - DCT vs DFT
     - Framstilling
     - Konklusjon - Forklaring
-7. Oppsummering
-8. Referanser
+7. Oppsummering &#10008;
+8. Referanser &#10008;
