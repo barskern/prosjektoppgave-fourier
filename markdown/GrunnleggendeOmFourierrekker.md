@@ -88,6 +88,12 @@ $$
 \sum\limits_{n=-\infty}^{\infty} |C_n|^2 = |C_0|^2 + 2\sum\limits_{n=1}^{\infty} |C_n|^2
 $$
 
+## Et eksempel på en fourierrekke
+
+Under har vi et eksempel på en fourierrekke som er framvist gjennom programmet _Maple_. Her ser vi at vi har en periodisk funksjon med periode $T$ som skal bli tilnærmet med en fourierrekke.
+
+<embed height="2000px" width="100%" src="EksempelPaaFourierrekke.html">
+
 [^1]: Weisstein, Eric W. "Generalized Fourier Series." From MathWorld--A Wolfram Web Resource. <http://mathworld.wolfram.com/GeneralizedFourierSeries.html> [Lesedato: 21.09.2017]
 
 [^2]: "Complex form of fourier series", <https://www.math24.net/complex-form-fourier-series/> [Lesedato: 21.09.2017]

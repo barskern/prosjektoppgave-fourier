@@ -1,18 +1,22 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<title>EksempelPaaFourierrekke1.html</title>
+<title>EksempelPaaFourierrekke.html</title>
 <!-- Created by Maple 2017.2, Linux -->
 </head>
+<a href="EksempelPaaFourierrekke.html#MapleAutoBookmark1">EksempelPaaFourierrekke.mw</a>
+<ul>
+</ul>
+<hr>
 <a name="MapleAutoBookmark1" />
 
 <body bgcolor="FFFFFF">
 <p align="left"><font color="#000000" size="5" face="Lucida Bright"><strong>Eksempel på fourierrekke</strong></font>&nbsp;</p>
-<p align="left"><font color="#000000" size="3" face="Lucida Bright">Dette er funksjonen som skal gjøres om til en fourierrekke. T er perioden til funksjonen.</font>&nbsp;</p>
-<p align="left"><font color="#78000e" size="3" face="Lucida Bright"><strong><img src="images/EksempelPaaFourierrekke_1.gif" width="451" height="18" alt="f := proc (t) options operator, arrow; piecewise(`and`(`<=`(0, t), `<=`(t, Pi)), 0, `and`(`<`(Pi, t), `<=`(t, `+`(`*`(2, `*`(Pi))))), 1) end proc; 1; T := `+`(`*`(2, `*`(Pi))); 1" align="center" border="0"></strong></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Lucida Bright">Dette er funksjonen som skal gjøres om til en fourierrekke. </font><font color="#000000" size="3" face="Lucida Bright"><em>T</em></font><font color="#000000" size="3" face="Lucida Bright"> er perioden til funksjonen.</font>&nbsp;</p>
+<p align="left"><font color="#78000e" size="3" face="Lucida Bright"><strong><img src="images/EksempelPaaFourierrekke_1.gif" width="462" height="18" alt="f := proc (t) options operator, arrow; piecewise(`and`(`<=`(0, t), `<=`(t, Pi)), -1, `and`(`<`(Pi, t), `<=`(t, `+`(`*`(2, `*`(Pi))))), 1) end proc; 1; T := `+`(`*`(2, `*`(Pi))); 1" align="center" border="0"></strong></font>&nbsp;</p>
 <p align="center"><table width='100%'>
 <tr>
-<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/EksempelPaaFourierrekke_2.gif" width="217" height="61" alt="Typesetting:-mprintslash([f := proc (t) options operator, arrow; piecewise(`and`(`<=`(0, t), `<=`(t, Pi)), 0, `and`(`<`(Pi, t), `<=`(t, `+`(`*`(2, `*`(Pi))))), 1) end proc], [proc (t) options operator..." align="center" border="0"></td>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/EksempelPaaFourierrekke_2.gif" width="233" height="61" alt="Typesetting:-mprintslash([f := proc (t) options operator, arrow; piecewise(`and`(`<=`(0, t), `<=`(t, Pi)), -1, `and`(`<`(Pi, t), `<=`(t, `+`(`*`(2, `*`(Pi))))), 1) end proc], [proc (t) options operato..." align="center" border="0"></td>
 </tr></font>&nbsp;</p>
 <p align="center"><tr>
 <td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/EksempelPaaFourierrekke_3.gif" width="72" height="21" alt="Typesetting:-mprintslash([T := `+`(`*`(2, `*`(Pi)))], [`+`(`*`(2, `*`(Pi)))])" align="center" border="0"></td>
@@ -46,7 +50,7 @@
 <p align="left"><font color="#000000" size="3" face="Times New Roman"><img src="images/EksempelPaaFourierrekke_12.gif" width="187" height="18" alt="psi_1 := evalc(psi(t, l))" align="center" border="0"></font>&nbsp;</p>
 <p align="center"><table width='100%'>
 <tr>
-<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/EksempelPaaFourierrekke_13.gif" width="486" height="42" alt="Typesetting:-mprintslash([psi_1 := `+`(`/`(1, 2), `-`(`/`(`*`(`/`(2, 7), `*`(sin(`+`(`*`(7, `*`(t)))))), `*`(Pi))), `-`(`/`(`*`(`/`(2, 5), `*`(sin(`+`(`*`(5, `*`(t)))))), `*`(Pi))), `-`(`/`(`*`(`/`(2,..." align="center" border="0"></td>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/EksempelPaaFourierrekke_13.gif" width="455" height="42" alt="Typesetting:-mprintslash([psi_1 := `+`(`-`(`/`(`*`(`/`(4, 7), `*`(sin(`+`(`*`(7, `*`(t)))))), `*`(Pi))), `-`(`/`(`*`(`/`(4, 5), `*`(sin(`+`(`*`(5, `*`(t)))))), `*`(Pi))), `-`(`/`(`*`(`/`(4, 3), `*`(si..." align="center" border="0"></td>
 <td width='5%' align='center'>(4)</td>
 </tr>
 </table></font>&nbsp;</p>
