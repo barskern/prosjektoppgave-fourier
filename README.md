@@ -60,3 +60,7 @@ Uferdig: &#10008;, Ferdig: &#10004;
     - Konklusjon - Forklaring
 7. Oppsummering &#10008;
 8. Referanser &#10008;
+
+#### Organisering i **maple**-mappen
+
+Har lagt til en ny organisering slik at vi lett kan organisere _maple_ filene i _maple_-mappen. Hvis filen tilhører punktnummer 3 (_Introduksjon_) i oppbyggningen, så starter filen med "$3X$-<filnavn>". $X$ er et tall mellom 0 og 9 som forteller rekkefølgen hvis det er flere filer til samme punktnummer i oppbyggningen. For eksempel så har vi "40-GrunnleggendeOmFourierrekker.mw" og "41-EksempelPaaFourierrekker.mw". 
