@@ -2,7 +2,7 @@
 <Worksheet>
 <Version major="2017" minor="2"/>
 <Label-Scheme value="2" prefix=""/>
-<View-Properties presentation="false" autoexpanding_sections="true" UserProfileName="Maple Default Profile" NumericFormat-ApplyInteger="true" NumericFormat-ApplyRational="true" NumericFormat-ApplyExponent="false">
+<View-Properties presentation="true" autoexpanding_sections="true" UserProfileName="Maple Default Profile" NumericFormat-ApplyInteger="true" NumericFormat-ApplyRational="true" NumericFormat-ApplyExponent="false">
 </View-Properties>
 <MapleNet-Properties prettyprint="3" warnlevel="3" preplot="" helpbrowser="standard" contextmenusize="automatic" displayprecision="-1" echo="1" unitattributes="&quot;fontweight&quot; = &quot;bold&quot;" imaginaryunit="I" longdelim="true" elisiontermsthreshold="10000" elisiondigitsafter="100" elisiondigitsbefore="100" plotdevice="inline" errorbreak="1" plotoptions="" plotdriver="opengl" quiet="false" elisiontermsbefore="100" elisiontermsafter="100" screenwidth="79" indentamount="4" plotoutput="terminal" screenpixelheight="768" rtablesize="10" useclientjvm="true" labelwidth="20" postplot="" typesetting="extended" ansi="false" elisiondigitsthreshold="10000" showassumed="1" errorcursor="false" labelling="true" screenheight="25" prompt="&gt; " verboseproc="1" latexwidth="8.0" ShowLabels="true"/>
 <Styles>
@@ -87,9 +87,33 @@
 <Task-table>
     <Task-category name="&lt;default&gt;"/>
 </Task-table>
-<Task/>
-<Group labelreference="L1" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="2D Output" executable="true" layout="Normal"><Equation executable="true" style="2D Output" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2I1EhRicvJStmb3JlZ3JvdW5kR1EoWzAsMCwwXUYnLyUpcmVhZG9ubHlHUSZmYWxzZUYnLyUsbWF0aHZhcmlhbnRHUSdub3JtYWxGJw==">JSFH</Equation></Text-field>
+<Task/><Presentation-Block>
+<Group view="presentation" inline-output="false" labelreference="L1569" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Heading 1" layout="Heading 1">Grunnleggende om fourierrekker</Text-field>
 </Input>
-</Group>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" inline-output="false" labelreference="L1573" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Heading 2" layout="Heading 2">Introduksjon til fourierrekker</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" inline-output="false" labelreference="L1574" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Heading 2"><Font encoding="UTF-8">En fourierrekke er en sum av harmoniske funksjoner med ulik frekvens og amplitude som er tiln\303\246rmet lik en periodisk funksjon. Med uendelig antall ledd i rekken s\303\245 er fourierrekken til en funksjon lik funksjonen, men med en endelig mengde ledd s\303\245 er fourierrekken tiln\303\246rmet lik funksjonen.</Font></Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" inline-output="false" labelreference="L1575" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Heading 2"><Font encoding="UTF-8">Utregningen av fourierrekker kalles harmonisk analyse. Fourierrekken er sv\303\246rt nyttig, og kan brukes til \303\245 gj\303\270re en tilfeldig periodisk funksjon om til en sum av enkle ledd. Man kan ogs\303\245 velge antall ledd man \303\270nsker basert p\303\245 hvor n\303\270yaktig man \303\270nsker \303\245 gjennomf\303\270re tiln\303\246rmingen.</Font></Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" inline-output="false" labelreference="L1576" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Heading 2" layout="Heading 2">Den generaliserte fourierrekken</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" inline-output="false" labelreference="L1577" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Heading 2"><Font encoding="UTF-8">Hvis vi bruker den generaliserte fourierrekken som benytter de ortogonale harmoniske funksjonene sinus og cosinus f\303\245r vi at vi kan utlede fourierrekken til en funksjon ved hjelp av to koeffisienter, et konstant ledd og to summer gitt under. Hvis det er av interesse, s\303\245 er utledningen av disse generaliserte formlene gjennomf\303\270rt av Eric W. Weisstein i sin artikkel om &quot;Generalized Fourier Series&quot;.</Font></Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" inline-output="false" labelreference="L1578" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Heading 2"></Text-field>
+</Input>
+</Group></Presentation-Block>
 </Worksheet>
