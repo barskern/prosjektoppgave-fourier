@@ -8,7 +8,7 @@ En prosjektoppgave i INGP300 der vi skal arbeide med fourierrekker.
 - ~~**Shazam**~~
 - **JPEG**
 - MP3
-- Gjennkjenning
+- Gjenkjenning
 - Kjøreanalyse
 - Radar
 - FM
