@@ -63,6 +63,6 @@ Uferdig: &#10008;, Ferdig: &#10004;
 
 #### Organisering i **maple**-mappen
 
-Har lagt til en ny organisering slik at vi lett kan organisere _maple_ filene i _maple_-mappen. Hvis filen tilhører punktnummer 3 (_Introduksjon_) i oppbyggningen, så starter filen med "$3X$-<filnavn>". $X$ er et tall mellom 0 og 9 som forteller rekkefølgen hvis det er flere filer til samme punktnummer i oppbyggningen. For eksempel så har vi "40-GrunnleggendeOmFourierrekker.mw" og "41-EksempelPaaFourierrekker.mw".
+Har lagt til en ny organisering slik at vi lett kan organisere _maple_ filene i _maple_-mappen. Hvis filen tilhører punktnummer 3 (_Introduksjon_) i oppbyggningen, så starter filen med "3X-\<filnavn\>". X er et tall mellom 0 og 9 som forteller rekkefølgen hvis det er flere filer til samme punktnummer i oppbyggningen. For eksempel så har vi "40-GrunnleggendeOmFourierrekker.mw" og "41-EksempelPaaFourierrekker.mw".
 
-**Maple**-filer med "00-<filnavn>" er ekstrafiler som ikke hører til under et spesielt oppbyggningspunkt.  
+**Maple**-filer med "00-\<filnavn\>" er ekstrafiler som ikke hører til under et spesielt oppbyggningspunkt.
