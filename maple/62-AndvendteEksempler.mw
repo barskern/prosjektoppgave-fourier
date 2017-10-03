@@ -97,14 +97,10 @@
 </Input>
 </Group></Presentation-Block><Presentation-Block>
 <Group view="presentation" inline-output="false" labelreference="L3" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal"><Font encoding="UTF-8">Vi har forklart hvordan vi har tenkt til \303\245 gj\303\270re et bilde om til en fourierrekke, derfor skal vi n\303\245 analysere noen eksempler der vi gj\303\270r et bilde om til en fourierrekke. Analysen skal, som nevnt i problemstillingen, best\303\245 av \303\245 finne ut hvilken av de tre ulike metodene (figur 2) som gir best resultat for f\303\246rrest mulige ledd i fourierrekken.</Font></Text-field>
+<Input><Text-field style="Text" layout="Normal"><Font encoding="UTF-8">Vi har forklart hvordan vi har tenkt til \303\245 gj\303\270re et bilde om til en fourierrekke, derfor skal vi n\303\245 analysere noen eksempler der vi gj\303\270r et bilde om til en fourierrekke. Analysen skal, som nevnt i problemstillingen, best\303\245 av \303\245 finne ut hvilken av de tre ulike metodene (figur 2) som gir best resultat for f\303\246rrest mulige ledd i fourierrekken.</Font><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">JSFH</Equation></Text-field>
 </Input>
 </Group></Presentation-Block><Presentation-Block>
-<Group view="presentation" inline-output="false" labelreference="L4" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal"></Text-field>
-</Input>
-</Group></Presentation-Block><Presentation-Block>
-<Group view="presentation" inline-output="false" labelreference="L5" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Group view="presentation" inline-output="false" labelreference="L12" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field style="Text" layout="Normal"></Text-field>
 </Input>
 </Group></Presentation-Block>

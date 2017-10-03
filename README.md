@@ -37,7 +37,7 @@ Studenter med lite kunnskap om fourierrekker, men forståelse for Maple.
 
 #### Oppbyggning
 
-Tittel: **En innføring i Fourierrekker**
+Tittel: **Fourierrekker fra bilder**
 
 Uferdig: &#10008;, Ferdig: &#10004;
 
