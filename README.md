@@ -41,9 +41,9 @@ Tittel: **Fourierrekker fra bilder**
 
 Uferdig: &#10008;, Ferdig: &#10004;
 
-1. Forside &#10008;
-2. Innholdsfortegnelse &#10008;
-3. Introduksjon &#10008;
+1. Forside &#10004;
+2. Innholdsfortegnelse &#10004;
+3. Introduksjon &#10004;
 4. Grunnleggende om Fourierrekker &#10004;
 5. Noen anvendelser av Fourierrekker (kort med noen eksempler) &#10008;
 6. JPEG og Fourier &#10008;
