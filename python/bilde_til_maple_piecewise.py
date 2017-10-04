@@ -11,6 +11,7 @@ from PIL import Image
 import numpy as np
 import os
 import json
+import math
 
 DATA_DIR = os.path.join(os.getcwd(), '../bilder/fourier_bilder/data/')
 IMAGE_DIR = os.path.join(os.getcwd(), '../bilder/fourier_bilder/')
@@ -50,7 +51,64 @@ def image_array_to_piecewise_metode2(np_array):
 
 
 def image_array_to_piecewise_metode3(np_array):
-    return "TODO"
+    res = "f(t) := piecewise("
+    roffset = 0
+    increment_offset = 1
+    x = 0
+    y = 0
+
+    res += str(roffset) + " < t <= " + str(roffset+1) + ", " + str(np_array[y][x]) + ", "
+    roffset += 1
+
+    for index in range(int(np_array.shape[0]/2)):
+        for i in range(increment_offset, 0, -1):
+            if(y > 0):
+                y -= 1
+            x += 1
+            res += str(roffset) + " < t <= " + str(roffset+1) + ", " + str(np_array[y][x]) + ", "
+            #print("X-loop: " + str(y) + str(x))
+            roffset += 1
+
+        increment_offset += (1 if increment_offset < np_array.shape[0]-1 else 0)
+
+        for i in range(increment_offset, 0, -1):
+            if(x > 0):
+                x -= 1
+            y += 1
+            res += str(roffset) + " < t <= " + str(roffset+1) + ", " + str(np_array[y][x]) + ", "
+            #print("Y-loop: " + str(y) + str(x))
+            roffset += 1
+
+        increment_offset += (1 if increment_offset < np_array.shape[0]-1 else 0)
+
+    for index in range(int(np_array.shape[0]/2)):
+        moved_over = False
+        for i in range(increment_offset, 0, -1):
+            if(y > 0 and moved_over):
+                y -= 1
+            moved_over = True
+            x += 1
+            res += str(roffset) + " < t <= " + str(roffset+1) + ", " + str(np_array[y][x]) + ", "
+            #print("X-loop: " + str(y) + str(x))
+            roffset += 1
+
+        increment_offset -= 1
+
+        moved_over = False
+        for i in range(increment_offset, 0, -1):
+            if(x > 0 and moved_over):
+                x -= 1
+            moved_over = True
+            y += 1
+            res += str(roffset) + " < t <= " + str(roffset+1) + ", " + str(np_array[y][x]) + ", "
+            #print("Y-loop: " + str(y) + str(x))
+            roffset += 1
+
+        increment_offset -= 1
+
+    res = res.strip().strip(',')
+    return res + ")"
+
 
 
 
