@@ -12,8 +12,8 @@ import numpy as np
 import os
 import json
 
-DATA_DIR = os.path.join(os.getcwd(), 'bilder/fourier_bilder/data/')
-IMAGE_DIR = os.path.join(os.getcwd(), 'bilder/fourier_bilder/')
+DATA_DIR = os.path.join(os.getcwd(), '../bilder/fourier_bilder/data/')
+IMAGE_DIR = os.path.join(os.getcwd(), '../bilder/fourier_bilder/')
 
 ##########################################################################
 IMAGE_DATA_NAME = "rocket_original.json" #### ENDRE PÅ DENNE FOR Å ENDRE DATA FIL
@@ -36,7 +36,18 @@ def image_array_to_piecewise_metode1(np_array):
     return res + ")"
 
 def image_array_to_piecewise_metode2(np_array):
-    return "TODO"
+    res = "f(t) := piecewise("
+    roffset = 0
+    reverse_row = False
+    for row in np_array:
+        altered_row = reversed(row) if reverse_row else row
+        reverse_row = not reverse_row
+        for value in altered_row:
+            res += str(roffset) + " < t <= " + str(roffset+1) + ", " + str(value) + ", "
+            roffset += 1
+    res = res.strip().strip(',')
+    return res + ")"
+
 
 def image_array_to_piecewise_metode3(np_array):
     return "TODO"
