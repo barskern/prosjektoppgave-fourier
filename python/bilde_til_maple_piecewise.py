@@ -162,7 +162,10 @@ def test_main():
     print(image_array_to_piecewise_metode3(image_np_array))
 
 def main_main():
+    ###########################################################################################
+    # Endre denne kodelinjen med din bildefil hvis du vil teste med andre bilder (uansett om det er et fargebilde eller ikke, så blir det sort/hvitt til slutt)
     image_name_ext = "small_black_white_road.jpg"
+    ###########################################################################################
     image_name = image_name_ext.split('.')[0]
 
     np_array = None
@@ -177,6 +180,8 @@ def main_main():
             # HER KAN VI LAGE EN FOURIERREKKE AV DATAEN OG GENERERE ET NYTT BILDE SOM BLE LAGET AV FOURIERREKKEN
             # Under er et eksempel på en slik endring, her en gjøre jeg bilde mørkere, bare for å vise at det funker!
             #####################################################################################
+            # Endre her om du vil teste ut andre ting som subtraksjon/addering osv.
+            # Bare ikke endre på det som står på venstre side av erlikhetstegnet
             array_eight_by_eights[row_index][col_index] = (eight_by_eight * .3).astype(np.dtype(np.uint8))
             #####################################################################################
 
