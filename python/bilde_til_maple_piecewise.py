@@ -171,12 +171,14 @@ def main_main():
 
     array_eight_by_eights = array_into_eight_by_eight(np_array)
 
-    for row_eight_by_eights in array_eight_by_eights:
-        for eight_by_eight in row_eight_by_eights:
-            ###############################
+    for row_index, row_eight_by_eights in enumerate(array_eight_by_eights):
+        for col_index, eight_by_eight in enumerate(row_eight_by_eights):
+            #####################################################################################
             # HER KAN VI LAGE EN FOURIERREKKE AV DATAEN OG GENERERE ET NYTT BILDE SOM BLE LAGET AV FOURIERREKKEN
-            ###############################
-            pass
+            # Under er et eksempel på en slik endring, her en gjøre jeg bilde mørkere, bare for å vise at det funker!
+            #####################################################################################
+            array_eight_by_eights[row_index][col_index] = (eight_by_eight * .3).astype(np.dtype(np.uint8))
+            #####################################################################################
 
     new_np_array = assembly_array_of_eight_by_eight(array_eight_by_eights)
 
