@@ -49,7 +49,6 @@ def image_array_to_piecewise_metode2(np_array):
     res = res.strip().strip(',')
     return res + ")"
 
-
 def image_array_to_piecewise_metode3(np_array):
     res = "f(t) := piecewise("
     roffset = 0
