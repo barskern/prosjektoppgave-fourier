@@ -111,14 +111,14 @@ def image_array_to_values_metode3(np_array):
 GENERATE_PIECEWISE_BOOL = True
 
 # Velg indeksene for 8x8 blokken dere vil analysere! 0, 0 er den blokken øverst til venstre.
-BLOCK_INDEXES = ( 0, 0 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
+BLOCK_INDEXES = ( 11, 0 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
 
 # Skriv inn navnet på bildefilen. NB! Filen må ligge i mappen "fourier_bilder"
-IMAGE_NAME = "fjell.jpg"
+IMAGE_NAME = "bilde1.jpg"
 
 # Endre denne variabelen til metoden dere ønsker. Fjern hastaggen foran metoden dere ønsker og putt en hastag forran alle metodene dere ikke vil bruke
-METHOD = image_array_to_values_metode1; REVERSE_METODE = values_to_image_array_metode1
-#METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2
+#METHOD = image_array_to_values_metode1; REVERSE_METODE = values_to_image_array_metode1
+METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2
 #METHOD = image_array_to_values_metode3; REVERSE_METODE = values_to_image_array_metode3 #IKKE IMPLEMENTERT TODO
 
 # Her skrive man inn cosinusuttrykket fra maple! Sørg for at det ser riktig ut og at verdien fra cosinusuttrykket blir returnert fra funksjonen
