@@ -108,7 +108,7 @@ def image_array_to_values_metode3(np_array):
 
 #####################################################################################################
 # Velg om du vil generere piecewise for maple eller lage et bilde fra psi(t) funksjonen.
-GENERATE_PIECEWISE_BOOL = True
+GENERATE_PIECEWISE_BOOL = False
 
 # Velg indeksene for 8x8 blokken dere vil analysere! 0, 0 er den blokken øverst til venstre.
 BLOCK_INDEXES = ( 11, 0 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
@@ -124,7 +124,8 @@ METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_m
 # Her skrive man inn cosinusuttrykket fra maple! Sørg for at det ser riktig ut og at verdien fra cosinusuttrykket blir returnert fra funksjonen
 # Bytt ut "255*cos(.4*t)" med det som kommer ut fra maple!
 def psi(t):
-    return 255*cos(.4*t)
+    return 50.75000000+(-0.2836218906e-2+.6832268852*I)*exp(-(.6872233931*I)*t)+(.5263939419+.3854060212*I)*exp(-(.5890486226*I)*t)+(0.2558651562e-2+.5945059170*I)*exp(-(.4908738522*I)*t)+(.7044837111+.3936040795*I)*exp(-(.3926990818*I)*t)+(0.3003960781e-2+.2529727158*I)*exp(-(.2945243113*I)*t)+(.3003739458+.8357541753*I)*exp(-(.1963495409*I)*t)+(.3537354614+1.240596950*I)*exp(-(0.9817477044e-1*I)*t)+(.3537354656-1.240596950*I)*exp((0.9817477044e-1*I)*t)+(.3003739519-.8357541745*I)*exp((.1963495409*I)*t)+(0.3003961875e-2-.2529727125*I)*exp((.2945243113*I)*t)+(.7044837088-.3936040792*I)*exp((.3926990818*I)*t)+(0.2558654688e-2-.5945059162*I)*exp((.4908738522*I)*t)+(.5263939411-.3854060231*I)*exp((.5890486226*I)*t)+(-0.2836217344e-2-.6832268845*I)*exp((.6872233931*I)*t)
+
 #####################################################################################################
 
 
