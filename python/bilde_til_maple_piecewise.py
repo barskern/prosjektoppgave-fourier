@@ -11,88 +11,12 @@ from PIL import Image
 import numpy as np
 import os
 import json
-import math
+from math import cos
 
 DATA_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '../bilder/fourier_bilder/data/'))
 IMAGE_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '../bilder/fourier_bilder/'))
 GENERATED_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '../bilder/fourier_bilder/genererte/'))
-
-# Lager en fourierrekke fra 8x8 blokk med term antall ledd TODO
-def odd_fourierseries(eight_by_eight, amount_terms, method_func):
-    try:
-        value_array = method_func(eight_by_eight)
-        T = len(value_array)
-    except:
-        print("Error: Please provide a valid \"method\" function.")
-        return None
-
-    def f(t):
-        return value_array[int(math.floor(t))]
-
-    def b(n):
-        return (4/T)*np.trapz(value_array) #TODO
-
-
-
-
-# Bredde og høyde på arrayen må være delelig på 8
-def array_into_eight_by_eight(np_array):
-    width = np_array.shape[0]
-    height = np_array.shape[1]
-    if(width % 8 > 0 or height % 8 > 0):
-        return None
-    # Les som en bok
-    array_eight_by_eights = [ [] for i in range(int(height/8)) ]
-    array_eight_by_eight_col_offset = 0
-
-    for y_matrix in range(int(width/8)):
-        n1 = np.arange(8*y_matrix, 8*y_matrix+8)
-        for x_matrix in range(int(height/8)):
-            n2 = np.arange(8*x_matrix, 8*x_matrix+8)
-            array_eight_by_eights[array_eight_by_eight_col_offset].append(np_array[n1[:,None], n2[None,:]])
-        array_eight_by_eight_col_offset += 1
-
-    return array_eight_by_eights
-
-# Gjør om en 2d array med 8x8 blokker til en stor 2d array med pikselverdier
-def assembly_array_of_eight_by_eight(array_eight_by_eights):
-    rows_eight_by_eight = []
-    for row_eight_by_eight in array_eight_by_eights:
-        rows_eight_by_eight.append(np.concatenate(row_eight_by_eight, axis=1))
-    return np.concatenate(rows_eight_by_eight, axis=0)
-
-# Gjør om en 2d array med pikselverdier til en png-bildefil
-def numpyarray_to_image(np_array, filepath):
-    new_image = Image.fromarray(np_array,'L')
-    with open(filepath, 'wb') as image_file:
-        new_image.save(image_file, 'PNG')
-
-# Gjør om en bildefil til en 2d array med pikselverdier (bare sort/hvitt)
-def image_to_numpyarray(loaded_image):
-    converted_image_file = loaded_image.convert('L')
-    return np.reshape(np.array(converted_image_file.getdata(), np.dtype(np.uint8)), (-1, converted_image_file.width))
-
-# Skriver en array til en json fil
-def write_datafile(filepath, np_array):
-    with open(filepath, "w") as json_file:
-        json.dump(np_array.tolist(), json_file)
-
-# Leser en json fil med en 2d array
-def read_datafile(filepath):
-    res_json = ""
-    with open(filepath, 'r') as json_file:
-        res_json = json.load(json_file)
-    return res_json
-
-# Gjør om 1d array med verdier til en piecewise kommando
-def array_to_piecewise(array):
-    res = "f(t) := piecewise("
-    roffset = 0
-    for value in array:
-        res += str(roffset) + " < t <= " + str(roffset+1) + ", " + str(value) + ", "
-        roffset += 1
-    res = res.strip().strip(',')
-    return res + ")"
+ANALYSERTE_BLOKKER_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '../bilder/fourier_bilder/genererte/analyserte_blokker/'))
 
 # Gjør om en array til en 1d array med pikselverdier. 3 ulike metoder (se "Prosjektoppgaven.mw")
 def image_array_to_values_metode1(np_array):
@@ -101,6 +25,14 @@ def image_array_to_values_metode1(np_array):
         for value in row:
             res.append(value)
     return res
+
+def values_to_image_array_metode1(value_array):
+    np_array = [ [] for i in range(8) ]
+    for i in range(8):
+        for j in range(8):
+            np_array[i].append(value_array[j + (i * 8)])
+
+    return np.array(np_array, dtype=np.uint8)
 
 def image_array_to_values_metode2(np_array):
     res = []
@@ -164,6 +96,102 @@ def image_array_to_values_metode3(np_array):
 
     return res
 
+#####################################################################################################
+# Velg om du vil generere piecewise for maple eller lage et bilde fra psi(t) funksjonen.
+GENERATE_PIECEWISE_BOOL = True
+
+# Velg indeksene for 8x8 blokken dere vil analysere! 0, 0 er den blokken øverst til venstre.
+BLOCK_INDEXES = ( 0, 0 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
+
+# Skriv inn navnet på bildefilen. NB! Filen må ligge i mappen "fourier_bilder"
+IMAGE_NAME = "fjell.jpg"
+
+# Endre denne variabelen til metoden dere ønsker. Fjern hastaggen foran metoden dere ønsker og putt en hastag forran alle metodene dere ikke vil bruke
+METHOD = image_array_to_values_metode1; REVERSE_METODE = values_to_image_array_metode1
+#METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2 #IKKE IMPLEMENTERT TODO
+#METHOD = image_array_to_values_metode3; REVERSE_METODE = values_to_image_array_metode3 #IKKE IMPLEMENTERT TODO
+
+# Her skrive man inn cosinusuttrykket fra maple! Sørg for at det ser riktig ut og at verdien fra cosinusuttrykket blir returnert fra funksjonen
+# Bytt ut "255*cos(.4*t)" med det som kommer ut fra maple!
+def psi(t):
+    return 255*cos(.4*t)
+#####################################################################################################
+
+
+# Lager en fourierrekke fra 8x8 blokk med term antall ledd TODO
+def odd_fourierseries(eight_by_eight, method_func, reverse_method_func):
+    try:
+        value_array = method_func(eight_by_eight)
+        T = len(value_array)
+    except:
+        print("Error: Vennligst velg en \"method\" funksjon.")
+        return eight_by_eight
+
+    for i in range(T):
+        value_array[i] = int(psi(i))
+
+    return reverse_method_func(value_array)
+
+# Bredde og høyde på arrayen må være delelig på 8
+def array_into_eight_by_eight(np_array):
+    width = np_array.shape[0]
+    height = np_array.shape[1]
+    if(width % 8 > 0 or height % 8 > 0):
+        return None
+    # Les som en bok
+    array_eight_by_eights = [ [] for i in range(int(height/8)) ]
+    array_eight_by_eight_col_offset = 0
+
+    for y_matrix in range(int(width/8)):
+        n1 = np.arange(8*y_matrix, 8*y_matrix+8)
+        for x_matrix in range(int(height/8)):
+            n2 = np.arange(8*x_matrix, 8*x_matrix+8)
+            array_eight_by_eights[array_eight_by_eight_col_offset].append(np_array[n1[:,None], n2[None,:]])
+        array_eight_by_eight_col_offset += 1
+
+    return array_eight_by_eights
+
+# Gjør om en 2d array med 8x8 blokker til en stor 2d array med pikselverdier
+def assembly_array_of_eight_by_eight(array_eight_by_eights):
+    rows_eight_by_eight = []
+    for row_eight_by_eight in array_eight_by_eights:
+        rows_eight_by_eight.append(np.concatenate(row_eight_by_eight, axis=1))
+    return np.concatenate(rows_eight_by_eight, axis=0)
+
+# Gjør om en 2d array med pikselverdier til en png-bildefil
+def numpyarray_to_image(np_array, filepath):
+    new_image = Image.fromarray(np_array,'L')
+    with open(filepath, 'wb') as image_file:
+        new_image.save(image_file, 'PNG')
+
+# Gjør om en bildefil til en 2d array med pikselverdier (bare sort/hvitt)
+def image_to_numpyarray(loaded_image):
+    converted_image_file = loaded_image.convert('L')
+    return np.reshape(np.array(converted_image_file.getdata(), np.dtype(np.uint8)), (-1, converted_image_file.width))
+
+# Skriver en array til en json fil
+def write_datafile(filepath, np_array):
+    with open(filepath, "w") as json_file:
+        json.dump(np_array.tolist(), json_file)
+
+# Leser en json fil med en 2d array
+def read_datafile(filepath):
+    res_json = ""
+    with open(filepath, 'r') as json_file:
+        res_json = json.load(json_file)
+    return res_json
+
+# Gjør om 1d array med verdier til en piecewise kommando
+def array_to_piecewise(array):
+    res = "f(t) := piecewise("
+    roffset = 0
+    for value in array:
+        res += str(roffset) + " < t <= " + str(roffset+1) + ", " + str(value) + ", "
+        roffset += 1
+    res = res.strip().strip(',')
+    return res + ")"
+
+
 # En funksjon som brukes til testing av et lite bilde
 def test_main():
     image_data_name = "rocket_original.json"
@@ -182,39 +210,48 @@ def test_main():
     print("Piecewise metode 3:")
     print(array_to_piecewise(image_array_to_values_metode3(image_np_array)))
 
-def main_main():
-    ###########################################################################################
-    # Endre denne kodelinjen med din bildefil hvis du vil teste med andre bilder (uansett om det er et fargebilde eller ikke, så blir det sort/hvitt til slutt)
-    image_name_ext = "fjell.jpg"
-    ###########################################################################################
-    image_name = image_name_ext.split('.')[0]
+def generate_piecewise():
+    image_name = IMAGE_NAME.split('.')[0]
 
     np_array = None
-    with Image.open(os.path.join(IMAGE_DIR, image_name_ext)) as big_image:
+    with Image.open(os.path.join(IMAGE_DIR, IMAGE_NAME)) as big_image:
         np_array = image_to_numpyarray(big_image)
 
     array_eight_by_eights = array_into_eight_by_eight(np_array)
 
-    for row_index, row_eight_by_eights in enumerate(array_eight_by_eights):
-        for col_index, eight_by_eight in enumerate(row_eight_by_eights):
-            #####################################################################################
-            # HER KAN VI LAGE EN FOURIERREKKE AV DATAEN OG GENERERE ET NYTT BILDE SOM BLE LAGET AV FOURIERREKKEN
-            # Under er et eksempel på en slik endring, her en gjøre jeg bilde mørkere, bare for å vise at det funker!
-            #####################################################################################
-            # Endre her om du vil teste ut andre ting som subtraksjon/addering osv.
-            # Bare ikke endre på det som står på venstre side av erlikhetstegnet
-            array_eight_by_eights[row_index][col_index] = (eight_by_eight * .3).astype(np.dtype(np.uint8))
-            #####################################################################################
+    print("Kjoerte: " + METHOD.__name__)
+    print(array_to_piecewise(METHOD(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]])))
 
-    new_np_array = assembly_array_of_eight_by_eight(array_eight_by_eights)
+def generate_image_from_psi():
+    image_name = IMAGE_NAME.split('.')[0]
 
-    numpyarray_to_image(new_np_array, os.path.join(GENERATED_DIR, image_name + ".png"))
+    np_array = None
+    with Image.open(os.path.join(IMAGE_DIR, IMAGE_NAME)) as big_image:
+        np_array = image_to_numpyarray(big_image)
+
+    array_eight_by_eights = array_into_eight_by_eight(np_array)
+
+    array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]] = odd_fourierseries(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]], METHOD, REVERSE_METODE).astype(np.dtype(np.uint8))
+
+#    for row_index, row_eight_by_eights in enumerate(array_eight_by_eights):
+#        for col_index, eight_by_eight in enumerate(row_eight_by_eights):
+#            array_eight_by_eights[row_index][col_index] = (odd_fourierseries(eight_by_eight, METHOD)).astype(np.dtype(np.uint8))
+
+#    new_np_array = assembly_array_of_eight_by_eight(array_eight_by_eights)
+
+#    numpyarray_to_image(new_np_array, os.path.join(GENERATED_DIR, image_name + ".png"))
+
+    numpyarray_to_image(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]], os.path.join(ANALYSERTE_BLOKKER_DIR, image_name + "-" + str(BLOCK_INDEXES) + ".png"))
 
     write_datafile(os.path.join(DATA_DIR, image_name + ".json"), np_array)
-    write_datafile(os.path.join(DATA_DIR, image_name + ".gen.json"), new_np_array)
+#    write_datafile(os.path.join(DATA_DIR, image_name + ".gen.json"), new_np_array)
 
 def main():
-    test_main()
+    if(GENERATE_PIECEWISE_BOOL):
+        generate_piecewise()
+    else:
+        generate_image_from_psi()
+
 
 if __name__ == '__main__':
     main()
