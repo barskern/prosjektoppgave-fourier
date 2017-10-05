@@ -44,6 +44,16 @@ def image_array_to_values_metode2(np_array):
             res.append(value)
     return res
 
+def values_to_image_array_metode2(value_array):
+    np_array = [ [] for i in range(8) ]
+    reverse_row = False
+    for i in range(8):
+        for j in range(8):
+            row_offset = j if not reverse_row else 7-j
+            np_array[i].append(value_array[(i*8) + row_offset])
+        reverse_row = not reverse_row
+    return np.array(np_array, dtype=np.uint8)
+
 def image_array_to_values_metode3(np_array):
     res = []
     increment_offset = 1
@@ -246,11 +256,14 @@ def generate_image_from_psi():
     write_datafile(os.path.join(DATA_DIR, image_name + ".json"), np_array)
 #    write_datafile(os.path.join(DATA_DIR, image_name + ".gen.json"), new_np_array)
 
-def main():
+def run():
     if(GENERATE_PIECEWISE_BOOL):
         generate_piecewise()
     else:
         generate_image_from_psi()
+
+def main():
+    run()
 
 
 if __name__ == '__main__':
