@@ -118,7 +118,7 @@ IMAGE_NAME = "fjell.jpg"
 
 # Endre denne variabelen til metoden dere ønsker. Fjern hastaggen foran metoden dere ønsker og putt en hastag forran alle metodene dere ikke vil bruke
 METHOD = image_array_to_values_metode1; REVERSE_METODE = values_to_image_array_metode1
-#METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2 #IKKE IMPLEMENTERT TODO
+#METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2
 #METHOD = image_array_to_values_metode3; REVERSE_METODE = values_to_image_array_metode3 #IKKE IMPLEMENTERT TODO
 
 # Her skrive man inn cosinusuttrykket fra maple! Sørg for at det ser riktig ut og at verdien fra cosinusuttrykket blir returnert fra funksjonen
