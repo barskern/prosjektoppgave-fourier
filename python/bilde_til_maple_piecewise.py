@@ -164,7 +164,7 @@ def test_main():
 def main_main():
     ###########################################################################################
     # Endre denne kodelinjen med din bildefil hvis du vil teste med andre bilder (uansett om det er et fargebilde eller ikke, så blir det sort/hvitt til slutt)
-    image_name_ext = "small_black_white_road.jpg"
+    image_name_ext = "fjell.jpg"
     ###########################################################################################
     image_name = image_name_ext.split('.')[0]
 
