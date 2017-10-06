@@ -114,23 +114,23 @@ GENERATE_PIECEWISE_BOOL = False
 BLOCK_INDEXES = ( 11, 0 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
 
 # Skriv inn navnet på bildefilen. NB! Filen må ligge i mappen "fourier_bilder"
-IMAGE_NAME = "bilde1.jpg"
+IMAGE_NAME = "natural.jpg"
 
 # Endre denne variabelen til metoden dere ønsker. Fjern hastaggen foran metoden dere ønsker og putt en hastag forran alle metodene dere ikke vil bruke
-#METHOD = image_array_to_values_metode1; REVERSE_METODE = values_to_image_array_metode1
-METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2
+METHOD = image_array_to_values_metode1; REVERSE_METODE = values_to_image_array_metode1
+#METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2
 #METHOD = image_array_to_values_metode3; REVERSE_METODE = values_to_image_array_metode3 #IKKE IMPLEMENTERT TODO
 
 # Her skrive man inn cosinusuttrykket fra maple! Sørg for at det ser riktig ut og at verdien fra cosinusuttrykket blir returnert fra funksjonen
 # Bytt ut "255*cos(.4*t)" med det som kommer ut fra maple!
 def psi(t):
-    return 50.75000000+(-0.2836218906e-2+.6832268852*I)*exp(-(.6872233931*I)*t)+(.5263939419+.3854060212*I)*exp(-(.5890486226*I)*t)+(0.2558651562e-2+.5945059170*I)*exp(-(.4908738522*I)*t)+(.7044837111+.3936040795*I)*exp(-(.3926990818*I)*t)+(0.3003960781e-2+.2529727158*I)*exp(-(.2945243113*I)*t)+(.3003739458+.8357541753*I)*exp(-(.1963495409*I)*t)+(.3537354614+1.240596950*I)*exp(-(0.9817477044e-1*I)*t)+(.3537354656-1.240596950*I)*exp((0.9817477044e-1*I)*t)+(.3003739519-.8357541745*I)*exp((.1963495409*I)*t)+(0.3003961875e-2-.2529727125*I)*exp((.2945243113*I)*t)+(.7044837088-.3936040792*I)*exp((.3926990818*I)*t)+(0.2558654688e-2-.5945059162*I)*exp((.4908738522*I)*t)+(.5263939411-.3854060231*I)*exp((.5890486226*I)*t)+(-0.2836217344e-2-.6832268845*I)*exp((.6872233931*I)*t)
+    return 82.25000000+8.357124166*cos(0.4908738522e-1*t)+1.532087415*cos(0.9817477044e-1*t)+1.446470366*cos(.1472621557*t)+1.490882806*cos(.1963495409*t)-.5448471104*cos(.2454369261*t)+.1648861975*cos(.2945243113*t)-.2035067453*cos(.3436116965*t)+.207945953*cos(.3926990818*t)-.3700802066*cos(.4417864670*t)+.2389569016*cos(.4908738522*t)-.7169683212*cos(.5399612374*t)-.2482631022*cos(.5890486226*t)+.1759630990*cos(.6381360078*t)-.1843427382*cos(.6872233931*t)-1.816473971*cos(.7363107783*t)-2.047362986*cos(.7853981635*t)+.4149094354*cos(.8344855487*t)-.7650736798*cos(.8835729339*t)-1.470637958*cos(.9326603192*t)+.2371513516*cos(.9817477044*t)
 
 #####################################################################################################
 
 
 # Lager en fourierrekke fra 8x8 blokk med term antall ledd TODO
-def odd_fourierseries(eight_by_eight, method_func, reverse_method_func):
+def change_to_fourierseriesvalues(eight_by_eight, method_func, reverse_method_func):
     try:
         value_array = method_func(eight_by_eight)
         T = len(value_array)
@@ -197,13 +197,13 @@ def array_to_piecewise(array):
     res = "f(t) := piecewise("
     roffset = 0
     for value in array:
-        res += str(roffset) + " < t <= " + str(roffset+1) + ", " + str(value) + ", "
+        res += str(roffset) + " <= t <= " + str(roffset+1) + ", " + str(value) + ", "
         roffset += 1
     res = res.strip().strip(',')
     return res + ")"
 
 
-# En funksjon som brukes til testing av et lite bilde
+# En funksjon som brukes tichange_to_fourierseriesvaluesl testing av et lite bilde
 def test_main():
     image_data_name = "rocket_original.json"
     image_array = read_datafile(os.path.join(DATA_DIR, image_data_name))
@@ -242,17 +242,28 @@ def generate_image_from_psi():
 
     array_eight_by_eights = array_into_eight_by_eight(np_array)
 
-    array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]] = odd_fourierseries(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]], METHOD, REVERSE_METODE).astype(np.dtype(np.uint8))
+    org_dir = os.path.join(ANALYSERTE_BLOKKER_DIR, image_name, "org")
+    fourier_dir = os.path.join(ANALYSERTE_BLOKKER_DIR, image_name, "fourier")
+
+    if not os.path.exists(org_dir):
+        os.makedirs(org_dir)
+
+    if not os.path.exists(fourier_dir):
+        os.makedirs(fourier_dir)
+
+    numpyarray_to_image(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]], os.path.join(org_dir, str(BLOCK_INDEXES) + ".png"))
+
+    array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]] = change_to_fourierseriesvalues(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]], METHOD, REVERSE_METODE).astype(np.dtype(np.uint8))
 
 #    for row_index, row_eight_by_eights in enumerate(array_eight_by_eights):
 #        for col_index, eight_by_eight in enumerate(row_eight_by_eights):
-#            array_eight_by_eights[row_index][col_index] = (odd_fourierseries(eight_by_eight, METHOD)).astype(np.dtype(np.uint8))
+#            array_eight_by_eights[row_index][col_index] = (change_to_fourierseriesvalues(eight_by_eight, METHOD)).astype(np.dtype(np.uint8))
 
 #    new_np_array = assembly_array_of_eight_by_eight(array_eight_by_eights)
 
 #    numpyarray_to_image(new_np_array, os.path.join(GENERATED_DIR, image_name + ".png"))
 
-    numpyarray_to_image(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]], os.path.join(ANALYSERTE_BLOKKER_DIR, image_name + "-" + str(BLOCK_INDEXES) + ".png"))
+    numpyarray_to_image(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]], os.path.join(fourier_dir, str(BLOCK_INDEXES) + ".png"))
 
     write_datafile(os.path.join(DATA_DIR, image_name + ".json"), np_array)
 #    write_datafile(os.path.join(DATA_DIR, image_name + ".gen.json"), new_np_array)
