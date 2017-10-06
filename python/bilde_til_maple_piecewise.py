@@ -161,7 +161,7 @@ def values_to_image_array_metode3(value_array):
 
 #####################################################################################################
 # Velg om du vil generere piecewise for maple eller lage et bilde fra psi(t) funksjonen.
-GENERATE_PIECEWISE_BOOL = False
+GENERATE_PIECEWISE_BOOL = True
 
 # Velg perioden til piecewise-kommandoen. Det vi har brukt før er 64
 PERIODE = 64
@@ -170,7 +170,7 @@ PERIODE = 64
 BLOCK_INDEXES = ( 30, 40 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
 
 # Skriv inn navnet på bildefilen. NB! Filen må ligge i mappen "fourier_bilder"
-IMAGE_NAME = "natural.jpg"
+IMAGE_NAME = "kunstig.png"
 
 # Endre denne variabelen til metoden dere ønsker. Fjern hastaggen foran metoden dere ønsker og putt en hastag forran alle metodene dere ikke vil bruke
 #METHOD = image_array_to_values_metode1; REVERSE_METODE = values_to_image_array_metode1; METHOD_NAME = "metode1"
@@ -220,7 +220,7 @@ def array_into_eight_by_eight(np_array):
     if(width % 8 > 0 or height % 8 > 0):
         return None
     # Les som en bok
-    array_eight_by_eights = [ [] for i in range(int(height/8)) ]
+    array_eight_by_eights = [ [] for i in range(int(height/8)+1) ]
     array_eight_by_eight_col_offset = 0
 
     for y_matrix in range(int(width/8)):
@@ -228,6 +228,7 @@ def array_into_eight_by_eight(np_array):
         for x_matrix in range(int(height/8)):
             n2 = np.arange(8*x_matrix, 8*x_matrix+8)
             array_eight_by_eights[array_eight_by_eight_col_offset].append(np_array[n1[:,None], n2[None,:]])
+
         array_eight_by_eight_col_offset += 1
 
     return array_eight_by_eights
@@ -270,10 +271,7 @@ def read_array_from_datafile(filepath):
     res_json = ""
     with open(filepath, 'r') as json_file:
         res_json = json.load(json_file)
-    return res_jsoner_bilder/analyserte_blokker/natural/metode2/data/delta/(11, 0).json
-bilder/fourier_bilder/analyserte_blokker/natural/metode2/data/fourier/(11, 0).json
-maple/Prosjektoppgaven2.mw
-maple/Prosjektoppgaven_MAS.bak
+    return res
 
 
 # Ser om en mappe eksisterer og lager den hvis ikke den eksisterer. Returnerer dirpath
