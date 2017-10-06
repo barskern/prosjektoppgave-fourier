@@ -167,12 +167,12 @@ GENERATE_PIECEWISE_BOOL = False
 PERIODE = 64
 
 # Velg indeksene for 8x8 blokken dere vil analysere! 0, 0 er den blokken øverst til venstre.
-BLOCK_INDEXES = ( 22, 26 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
+BLOCK_INDEXES = ( 11, 11 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
 # natur (22,26)
 # kunstig (11,11)
 
 # Skriv inn navnet på bildefilen. NB! Filen må ligge i mappen "fourier_bilder"
-IMAGE_NAME = "natur.png"
+IMAGE_NAME = "kunstig.png"
 
 # Endre denne variabelen til metoden dere ønsker. Fjern hastaggen foran metoden dere ønsker og putt en hastag forran alle metodene dere ikke vil bruke
 #METHOD = image_array_to_values_metode1; REVERSE_METODE = values_to_image_array_metode1; METHOD_NAME = "metode1"
@@ -182,7 +182,7 @@ METHOD = image_array_to_values_metode3; REVERSE_METODE = values_to_image_array_m
 # Her skrive man inn cosinusuttrykket fra maple! Sørg for at det ser riktig ut og at verdien fra cosinusuttrykket blir returnert fra funksjonen
 # Bytt ut "255*cos(.4*t)" med det som kommer ut fra maple!
 def psi(t):
-    return 1.769126039*cos(.7853981635*t)-4.034061056*cos(.7363107783*t)+0.539159490e-1*cos(.6872233931*t)+.8937168007*cos(.6381360078*t)+14.42273736*cos(.5890486226*t)+.2288648927*cos(.5399612374*t)-3.046817471*cos(.4908738522*t)-3.058664660*cos(.4417864670*t)-4.103695132*cos(.3926990818*t)+0.480751031e-1*cos(.3436116965*t)+3.379156056*cos(.2945243113*t)-.986716425*cos(.2454369261*t)-6.875958246*cos(.1963495409*t)-.38531177*cos(.1472621557*t)-4.920585168*cos(0.9817477044e-1*t)-15.95154436*cos(0.4908738522e-1*t)+5.300766655*cos(1.423534171*t)+10.45961345*cos(.9817477044*t)+2.481377686*cos(1.374446786*t)-7.674725384*cos(1.030835090*t)+.8251672258*cos(.9326603192*t)-12.72286854*cos(1.472621557*t)-10.70114577*cos(1.325359401*t)+6.370079702*cos(1.276272016*t)+59.50000000+7.295606931*cos(1.079922475*t)-12.01165081*cos(.8835729339*t)-2.783162121*cos(1.178097245*t)-1.168868866*cos(1.129009860*t)+2.491166029*cos(.8344855487*t)+8.410422904*cos(1.227184630*t)
+    return 87.31250000-3.566504710*cos(.1472621557*t)+141.0276691*cos(0.4908738522e-1*t)+.985911939*cos(.2945243113*t)-30.20040468*cos(.1963495409*t)-19.82176616*cos(.2454369261*t)+64.69265187*cos(0.9817477044e-1*t)-5.785914227*cos(.4908738522*t)+11.87593921*cos(.3436116965*t)+9.888450648*cos(.3926990818*t)+1.725469068*cos(.4417864670*t)-8.730228779*cos(.8344855487*t)-8.052902122*cos(.5399612374*t)-3.278710526*cos(.5890486226*t)+4.938007688*cos(.6381360078*t)-5.852056005*cos(.7853981635*t)-2.248346107*cos(.8835729339*t)+6.159973590*cos(.9326603192*t)+7.475453779*cos(.9817477044*t)+8.610305090*cos(.6872233931*t)+3.258151057*cos(.7363107783*t)+1.287146206*cos(1.030835090*t)-4.999438596*cos(1.079922475*t)-5.420052033*cos(1.129009860*t)-3.142672782*cos(1.423534171*t)-2.335600308*cos(1.472621557*t)+3.729066048*cos(1.276272016*t)-1.094383682*cos(1.178097245*t)+2.971808007*cos(1.227184630*t)+1.643479624*cos(1.325359401*t)-1.312866830*cos(1.374446786*t)
 
 ####################################################################################################
 
