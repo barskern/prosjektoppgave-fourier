@@ -201,6 +201,9 @@ class pf:
    def format(text, l_pf):
        return l_pf + text + pf.END
 
+def clamp(n, smallest, largest):
+    return max(smallest, min(n, largest))
+
 # Returnerer en 8x8 som er et resultat av psi(t)
 def change_to_fourierseriesvalues(eight_by_eight, method_func, reverse_method_func):
     try:
@@ -211,7 +214,7 @@ def change_to_fourierseriesvalues(eight_by_eight, method_func, reverse_method_fu
         return eight_by_eight
 
     for i in range(T):
-        value_array[i] = min(max(int(psi(i)), 255), 0)
+        value_array[i] = clamp(int(psi(i)), 0, 255)
 
     return reverse_method_func(value_array)
 
