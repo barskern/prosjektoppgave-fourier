@@ -174,22 +174,13 @@ IMAGE_NAME = "natural.jpg"
 
 # Endre denne variabelen til metoden dere ønsker. Fjern hastaggen foran metoden dere ønsker og putt en hastag forran alle metodene dere ikke vil bruke
 #METHOD = image_array_to_values_metode1; REVERSE_METODE = values_to_image_array_metode1; METHOD_NAME = "metode1"
-<<<<<<< HEAD
-#METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2; METHOD_NAME = "metode2"
-METHOD = image_array_to_values_metode3; REVERSE_METODE = values_to_image_array_metode3; METHOD_NAME = "metode3"
-=======
 METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2; METHOD_NAME = "metode2"
 #METHOD = image_array_to_values_metode3; REVERSE_METODE = values_to_image_array_metode3; METHOD_NAME = "metode3"
->>>>>>> fungerende
 
 # Her skrive man inn cosinusuttrykket fra maple! Sørg for at det ser riktig ut og at verdien fra cosinusuttrykket blir returnert fra funksjonen
 # Bytt ut "255*cos(.4*t)" med det som kommer ut fra maple!
 def psi(t):
-<<<<<<< HEAD
-    return 207.5000000+16.62215642*cos(0.4908738522e-1*t)+1.608993164*cos(0.9817477044e-1*t)+1.224230802*cos(.1472621557*t)+0.102791300e-1*cos(.1963495409*t)+2.047492789*cos(.2454369261*t)+.8024390872*cos(.2945243113*t)-.9786069685*cos(.3436116965*t)-2.027723452*cos(.3926990818*t)+5.958928341*cos(.4417864670*t)-1.463803885*cos(.4908738522*t)-4.317655497*cos(.5399612374*t)+3.874737238*cos(.5890486226*t)-2.117979905*cos(.6381360078*t)-.4176889101*cos(.6872233931*t)+1.620391146*cos(.7363107783*t)-1.014027093*cos(.7853981635*t)+2.117146310*cos(.8344855487*t)-3.232560805*cos(.8835729339*t)+2.983737454*cos(.9326603192*t)-.1423950458*cos(.9817477044*t)
-=======
     return 82.25000000+8.454173210*cos(0.4908738522e-1*t)+1.374451890*cos(0.9817477044e-1*t)+1.105522052*cos(.1472621557*t)+.7547664910*cos(.1963495409*t)-0.312044437e-1*cos(.2454369261*t)+.4680677291*cos(.2945243113*t)+.6342944921*cos(.3436116965*t)-.6875863776*cos(.3926990818*t)+.5660194426*cos(.4417864670*t)+.7254631510*cos(.4908738522*t)+0.19630131e-2*cos(.5399612374*t)-1.570199201*cos(.5890486226*t)-.8027453017*cos(.6381360078*t)-.6784212671*cos(.6872233931*t)-1.126919112*cos(.7363107783*t)-2.047362983*cos(.7853981635*t)-.2014697104*cos(.8344855487*t)-.4519976364*cos(.8835729339*t)-.6269875307*cos(.9326603192*t)+.7587469224*cos(.9817477044*t)
->>>>>>> fungerende
 
 ####################################################################################################
 
@@ -279,7 +270,11 @@ def read_array_from_datafile(filepath):
     res_json = ""
     with open(filepath, 'r') as json_file:
         res_json = json.load(json_file)
-    return res_json
+    return res_jsoner_bilder/analyserte_blokker/natural/metode2/data/delta/(11, 0).json
+bilder/fourier_bilder/analyserte_blokker/natural/metode2/data/fourier/(11, 0).json
+maple/Prosjektoppgaven2.mw
+maple/Prosjektoppgaven_MAS.bak
+
 
 # Ser om en mappe eksisterer og lager den hvis ikke den eksisterer. Returnerer dirpath
 def check_directory(dirpath):
