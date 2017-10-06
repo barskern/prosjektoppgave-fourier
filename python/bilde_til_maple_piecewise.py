@@ -161,13 +161,15 @@ def values_to_image_array_metode3(value_array):
 
 #####################################################################################################
 # Velg om du vil generere piecewise for maple eller lage et bilde fra psi(t) funksjonen.
-GENERATE_PIECEWISE_BOOL = True
+GENERATE_PIECEWISE_BOOL = False
 
 # Velg perioden til piecewise-kommandoen. Det vi har brukt før er 64
 PERIODE = 64
 
 # Velg indeksene for 8x8 blokken dere vil analysere! 0, 0 er den blokken øverst til venstre.
-BLOCK_INDEXES = ( 30, 40 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
+BLOCK_INDEXES = ( 11, 11 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
+# natur (22,26)
+# kunstig (11,11)
 
 # Skriv inn navnet på bildefilen. NB! Filen må ligge i mappen "fourier_bilder"
 IMAGE_NAME = "kunstig.png"
@@ -180,7 +182,7 @@ METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_m
 # Her skrive man inn cosinusuttrykket fra maple! Sørg for at det ser riktig ut og at verdien fra cosinusuttrykket blir returnert fra funksjonen
 # Bytt ut "255*cos(.4*t)" med det som kommer ut fra maple!
 def psi(t):
-    return 82.25000000+8.454173210*cos(0.4908738522e-1*t)+1.374451890*cos(0.9817477044e-1*t)+1.105522052*cos(.1472621557*t)+.7547664910*cos(.1963495409*t)-0.312044437e-1*cos(.2454369261*t)+.4680677291*cos(.2945243113*t)+.6342944921*cos(.3436116965*t)-.6875863776*cos(.3926990818*t)+.5660194426*cos(.4417864670*t)+.7254631510*cos(.4908738522*t)+0.19630131e-2*cos(.5399612374*t)-1.570199201*cos(.5890486226*t)-.8027453017*cos(.6381360078*t)-.6784212671*cos(.6872233931*t)-1.126919112*cos(.7363107783*t)-2.047362983*cos(.7853981635*t)-.2014697104*cos(.8344855487*t)-.4519976364*cos(.8835729339*t)-.6269875307*cos(.9326603192*t)+.7587469224*cos(.9817477044*t)
+    return 87.31250000-26.28139678*cos(.6872233931*t)-.558105397*cos(.6381360078*t)-.4429782361*cos(.5890486226*t)-9.727022590*cos(.5399612374*t)+35.73977026*cos(.4417864670*t)-23.77173001*cos(.4908738522*t)-.2758849375*cos(1.276272016*t)+14.43287478*cos(1.325359401*t)+94.78152004*cos(.3926990818*t)-5.178799325*cos(1.374446786*t)+7.848280087*cos(1.472621557*t)-2.032607729*cos(1.423534171*t)+94.76072592*cos(0.4908738522e-1*t)+7.59868663*cos(0.9817477044e-1*t)+2.820123666*cos(.1472621557*t)+31.59389714*cos(.3436116965*t)-17.08111621*cos(.2945243113*t)-2.833511842*cos(.2454369261*t)+3.628188064*cos(.1963495409*t)-27.53698704*cos(.7363107783*t)+6.488675826*cos(.7853981635*t)-16.34303864*cos(.8344855487*t)-26.89808731*cos(.8835729339*t)+9.868053260*cos(.9817477044*t)+4.170214808*cos(.9326603192*t)+18.53256178*cos(1.030835090*t)+9.288161939*cos(1.079922475*t)-8.128108834*cos(1.129009860*t)+4.725676731*cos(1.178097245*t)-2.928708739*cos(1.227184630*t)
 
 ####################################################################################################
 
@@ -199,6 +201,9 @@ class pf:
    def format(text, l_pf):
        return l_pf + text + pf.END
 
+def clamp(n, smallest, largest):
+    return max(smallest, min(n, largest))
+
 # Returnerer en 8x8 som er et resultat av psi(t)
 def change_to_fourierseriesvalues(eight_by_eight, method_func, reverse_method_func):
     try:
@@ -209,7 +214,7 @@ def change_to_fourierseriesvalues(eight_by_eight, method_func, reverse_method_fu
         return eight_by_eight
 
     for i in range(T):
-        value_array[i] = int(psi(i))
+        value_array[i] = clamp(int(psi(i)), 0, 255)
 
     return reverse_method_func(value_array)
 
