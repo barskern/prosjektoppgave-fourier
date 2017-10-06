@@ -11,12 +11,11 @@ from PIL import Image
 import numpy as np
 import os
 import json
-from math import cos
+from math import cos, pi
+import re
 
-DATA_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '../bilder/fourier_bilder/data/'))
 IMAGE_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '../bilder/fourier_bilder/'))
-GENERATED_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '../bilder/fourier_bilder/genererte/'))
-ANALYSERTE_BLOKKER_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '../bilder/fourier_bilder/genererte/analyserte_blokker/'))
+ANALYSERTE_BLOKKER_DIR = os.path.join(IMAGE_DIR, "analyserte_blokker/")
 
 # Gjør om en array til en 1d array med pikselverdier. 3 ulike metoder (se "Prosjektoppgaven.mw")
 def image_array_to_values_metode1(np_array):
@@ -106,9 +105,66 @@ def image_array_to_values_metode3(np_array):
 
     return res
 
+def values_to_image_array_metode3(value_array):
+    np_array = np.indices((8,8))[0]
+    increment_offset = 1
+    x = 0
+    y = 0
+
+    reversed_value_array = list(reversed(value_array))
+
+    np_array[y][x] = reversed_value_array.pop()
+
+    for index in range(int(np_array.shape[0]/2)):
+        for i in range(increment_offset, 0, -1):
+            if(y > 0):
+                y -= 1
+            x += 1
+            np_array[y][x] = reversed_value_array.pop()
+            #print("X-loop: " + str(y) + str(x))
+
+        increment_offset += (1 if increment_offset < np_array.shape[0]-1 else 0)
+
+        for i in range(increment_offset, 0, -1):
+            if(x > 0):
+                x -= 1
+            y += 1
+            np_array[y][x] = reversed_value_array.pop()
+            #print("Y-loop: " + str(y) + str(x))
+
+        increment_offset += (1 if increment_offset < np_array.shape[0]-1 else 0)
+
+    for index in range(int(np_array.shape[0]/2)):
+        moved_over = False
+        for i in range(increment_offset, 0, -1):
+            if(y > 0 and moved_over):
+                y -= 1
+            moved_over = True
+            x += 1
+            np_array[y][x] = reversed_value_array.pop()
+            #print("X-loop: " + str(y) + str(x))
+
+        increment_offset -= 1
+
+        moved_over = False
+        for i in range(increment_offset, 0, -1):
+            if(x > 0 and moved_over):
+                x -= 1
+            moved_over = True
+            y += 1
+            np_array[y][x] = reversed_value_array.pop()
+            #print("Y-loop: " + str(y) + str(x))
+
+        increment_offset -= 1
+
+    return np.array(np_array, dtype=np.uint8)
+
 #####################################################################################################
 # Velg om du vil generere piecewise for maple eller lage et bilde fra psi(t) funksjonen.
 GENERATE_PIECEWISE_BOOL = False
+
+# Velg perioden til piecewise-kommandoen. Det vi har brukt før er 64
+PERIODE = 64
 
 # Velg indeksene for 8x8 blokken dere vil analysere! 0, 0 er den blokken øverst til venstre.
 BLOCK_INDEXES = ( 11, 0 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
@@ -117,19 +173,33 @@ BLOCK_INDEXES = ( 11, 0 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y
 IMAGE_NAME = "natural.jpg"
 
 # Endre denne variabelen til metoden dere ønsker. Fjern hastaggen foran metoden dere ønsker og putt en hastag forran alle metodene dere ikke vil bruke
-METHOD = image_array_to_values_metode1; REVERSE_METODE = values_to_image_array_metode1
-#METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2
-#METHOD = image_array_to_values_metode3; REVERSE_METODE = values_to_image_array_metode3 #IKKE IMPLEMENTERT TODO
+#METHOD = image_array_to_values_metode1; REVERSE_METODE = values_to_image_array_metode1; METHOD_NAME = "metode1"
+METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2; METHOD_NAME = "metode2"
+#METHOD = image_array_to_values_metode3; REVERSE_METODE = values_to_image_array_metode3; METHOD_NAME = "metode3"
 
 # Her skrive man inn cosinusuttrykket fra maple! Sørg for at det ser riktig ut og at verdien fra cosinusuttrykket blir returnert fra funksjonen
 # Bytt ut "255*cos(.4*t)" med det som kommer ut fra maple!
 def psi(t):
-    return 82.25000000+8.357124166*cos(0.4908738522e-1*t)+1.532087415*cos(0.9817477044e-1*t)+1.446470366*cos(.1472621557*t)+1.490882806*cos(.1963495409*t)-.5448471104*cos(.2454369261*t)+.1648861975*cos(.2945243113*t)-.2035067453*cos(.3436116965*t)+.207945953*cos(.3926990818*t)-.3700802066*cos(.4417864670*t)+.2389569016*cos(.4908738522*t)-.7169683212*cos(.5399612374*t)-.2482631022*cos(.5890486226*t)+.1759630990*cos(.6381360078*t)-.1843427382*cos(.6872233931*t)-1.816473971*cos(.7363107783*t)-2.047362986*cos(.7853981635*t)+.4149094354*cos(.8344855487*t)-.7650736798*cos(.8835729339*t)-1.470637958*cos(.9326603192*t)+.2371513516*cos(.9817477044*t)
+    return 82.25000000+8.454173210*cos(0.4908738522e-1*t)+1.374451890*cos(0.9817477044e-1*t)+1.105522052*cos(.1472621557*t)+.7547664910*cos(.1963495409*t)-0.312044437e-1*cos(.2454369261*t)+.4680677291*cos(.2945243113*t)+.6342944921*cos(.3436116965*t)-.6875863776*cos(.3926990818*t)+.5660194426*cos(.4417864670*t)+.7254631510*cos(.4908738522*t)+0.19630131e-2*cos(.5399612374*t)-1.570199201*cos(.5890486226*t)-.8027453017*cos(.6381360078*t)-.6784212671*cos(.6872233931*t)-1.126919112*cos(.7363107783*t)-2.047362983*cos(.7853981635*t)-.2014697104*cos(.8344855487*t)-.4519976364*cos(.8835729339*t)-.6269875307*cos(.9326603192*t)+.7587469224*cos(.9817477044*t)
 
-#####################################################################################################
+####################################################################################################
 
+class pf:
+   PURPLE = '\033[95m'
+   CYAN = '\033[96m'
+   DARKCYAN = '\033[36m'
+   BLUE = '\033[94m'
+   GREEN = '\033[92m'
+   YELLOW = '\033[93m'
+   RED = '\033[91m'
+   BOLD = '\033[1m'
+   UNDERLINE = '\033[4m'
+   END = '\033[0m'
 
-# Lager en fourierrekke fra 8x8 blokk med term antall ledd TODO
+   def format(text, l_pf):
+       return l_pf + text + pf.END
+
+# Returnerer en 8x8 som er et resultat av psi(t)
 def change_to_fourierseriesvalues(eight_by_eight, method_func, reverse_method_func):
     try:
         value_array = method_func(eight_by_eight)
@@ -181,24 +251,37 @@ def image_to_numpyarray(loaded_image):
     return np.reshape(np.array(converted_image_file.getdata(), np.dtype(np.uint8)), (-1, converted_image_file.width))
 
 # Skriver en array til en json fil
-def write_datafile(filepath, np_array):
+def write_array_to_datafile(filepath, np_array):
     with open(filepath, "w") as json_file:
-        json.dump(np_array.tolist(), json_file)
+        json_str = json.dumps(np_array.tolist())
+        json_str = re.sub(r'([0-9]+\],)','\g<1>\n', json_str)
+        json_str = re.sub(r'([^\-]\b[0-9]{1}\b)','   \g<1>',json_str)
+        json_str = re.sub(r'([\-]\b[0-9]{1}\b)|([^\-]\b[0-9]{2}\b)','  \g<1>\g<2>',json_str)
+        json_str = re.sub(r'([\-]\b[0-9]{2}\b)|([^\-]\b[0-9]{3}\b)',' \g<1>\g<2>',json_str)
+        json_file.write(json_str)
 
 # Leser en json fil med en 2d array
-def read_datafile(filepath):
+def read_array_from_datafile(filepath):
     res_json = ""
     with open(filepath, 'r') as json_file:
         res_json = json.load(json_file)
     return res_json
 
+# Ser om en mappe eksisterer og lager den hvis ikke den eksisterer. Returnerer dirpath
+def check_directory(dirpath):
+    if not os.path.exists(dirpath):
+        os.makedirs(dirpath)
+    return dirpath
+
 # Gjør om 1d array med verdier til en piecewise kommando
-def array_to_piecewise(array):
+def array_to_piecewise(array, periode):
     res = "f(t) := piecewise("
     roffset = 0
+    array_len = len(array)
+    increment = periode/array_len
     for value in array:
-        res += str(roffset) + " <= t <= " + str(roffset+1) + ", " + str(value) + ", "
-        roffset += 1
+        res += str(roffset) + " <= t <= " + str(roffset+increment) + ", " + str(value) + ", "
+        roffset += increment
     res = res.strip().strip(',')
     return res + ")"
 
@@ -206,7 +289,7 @@ def array_to_piecewise(array):
 # En funksjon som brukes tichange_to_fourierseriesvaluesl testing av et lite bilde
 def test_main():
     image_data_name = "rocket_original.json"
-    image_array = read_datafile(os.path.join(DATA_DIR, image_data_name))
+    image_array = read_array_from_datafile(os.path.join(DATA_DIR, image_data_name))
     image_np_array = np.array(image_array, np.dtype(np.uint8))
     image_name = image_data_name.split('.')[0] + ".png"
     filepath = os.path.join(IMAGE_DIR, image_name)
@@ -230,43 +313,50 @@ def generate_piecewise():
 
     array_eight_by_eights = array_into_eight_by_eight(np_array)
 
-    print("Kjoerte: " + METHOD.__name__)
-    print(array_to_piecewise(METHOD(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]])))
+    print("Kjoerte " + pf.format(METHOD.__name__, pf.BOLD) + " paa bilde " + pf.format(IMAGE_NAME, pf.BOLD) + " med " + pf.format(str(PERIODE), pf.BOLD) + " som periode")
+    print(array_to_piecewise(METHOD(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]]), PERIODE))
 
 def generate_image_from_psi():
     image_name = IMAGE_NAME.split('.')[0]
 
+    print("Laster bilde: " + pf.format(IMAGE_NAME, pf.BOLD))
     np_array = None
     with Image.open(os.path.join(IMAGE_DIR, IMAGE_NAME)) as big_image:
         np_array = image_to_numpyarray(big_image)
 
+    print("Skriver bildedata av hele bildet til json-filer.")
+    write_array_to_datafile(os.path.join(IMAGE_DIR, image_name + ".json"), np_array)
+
+    print("Genererer 8x8 blokker av det lastede bildet.")
     array_eight_by_eights = array_into_eight_by_eight(np_array)
 
-    org_dir = os.path.join(ANALYSERTE_BLOKKER_DIR, image_name, "org")
-    fourier_dir = os.path.join(ANALYSERTE_BLOKKER_DIR, image_name, "fourier")
+    image_org_dir = check_directory(os.path.join(ANALYSERTE_BLOKKER_DIR, image_name, METHOD_NAME, "bilder", "org/"))
+    image_fourier_dir = check_directory(os.path.join(ANALYSERTE_BLOKKER_DIR, image_name, METHOD_NAME, "bilder", "fourier/"))
+    data_org_dir = check_directory(os.path.join(ANALYSERTE_BLOKKER_DIR, image_name, METHOD_NAME, "data", "org/"))
+    data_fourier_dir = check_directory(os.path.join(ANALYSERTE_BLOKKER_DIR, image_name, METHOD_NAME, "data", "fourier/"))
+    data_delta_dir = check_directory(os.path.join(ANALYSERTE_BLOKKER_DIR, image_name, METHOD_NAME, "data", "delta/"))
 
-    if not os.path.exists(org_dir):
-        os.makedirs(org_dir)
+    print("Velger 8x8-blokken som skal analyseres: " + pf.format(str(BLOCK_INDEXES), pf.BOLD))
+    print("Lager bilde av 8x8-blokken som skal analyseres før den endres.")
+    org_eight_by_eight = array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]]
+    numpyarray_to_image(org_eight_by_eight, os.path.join(image_org_dir, str(BLOCK_INDEXES) + ".png"))
 
-    if not os.path.exists(fourier_dir):
-        os.makedirs(fourier_dir)
+    print("Skriver data av 8x8-blokken som skal analyseres før den endres.")
+    write_array_to_datafile(os.path.join(data_org_dir, str(BLOCK_INDEXES) + ".json"), org_eight_by_eight)
 
-    numpyarray_to_image(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]], os.path.join(org_dir, str(BLOCK_INDEXES) + ".png"))
+    print(pf.format("Lager en ny 8x8 fra psi(t) funksjonen.", pf.BOLD))
+    fourier_eight_by_eight = change_to_fourierseriesvalues(org_eight_by_eight, METHOD, REVERSE_METODE).astype(np.dtype(np.uint8))
 
-    array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]] = change_to_fourierseriesvalues(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]], METHOD, REVERSE_METODE).astype(np.dtype(np.uint8))
+    print("Lager bilde av 8x8-blokken som er generert fra psi(t).")
+    numpyarray_to_image(fourier_eight_by_eight, os.path.join(image_fourier_dir, str(BLOCK_INDEXES) + ".png"))
 
-#    for row_index, row_eight_by_eights in enumerate(array_eight_by_eights):
-#        for col_index, eight_by_eight in enumerate(row_eight_by_eights):
-#            array_eight_by_eights[row_index][col_index] = (change_to_fourierseriesvalues(eight_by_eight, METHOD)).astype(np.dtype(np.uint8))
+    print("Skriver data av 8x8-blokken som er generert fra psi(t).")
+    write_array_to_datafile(os.path.join(data_fourier_dir, str(BLOCK_INDEXES) + ".json"), fourier_eight_by_eight)
 
-#    new_np_array = assembly_array_of_eight_by_eight(array_eight_by_eights)
+    print("Skriver data av 8x8-blokken som er forskjellen mellom pikselverdienen fra orginal og fourier")
+    write_array_to_datafile(os.path.join(data_delta_dir, str(BLOCK_INDEXES) + ".json"), org_eight_by_eight.astype(np.dtype(np.int8)) - fourier_eight_by_eight.astype(np.dtype(np.int8)))
 
-#    numpyarray_to_image(new_np_array, os.path.join(GENERATED_DIR, image_name + ".png"))
-
-    numpyarray_to_image(array_eight_by_eights[BLOCK_INDEXES[0]][BLOCK_INDEXES[1]], os.path.join(fourier_dir, str(BLOCK_INDEXES) + ".png"))
-
-    write_datafile(os.path.join(DATA_DIR, image_name + ".json"), np_array)
-#    write_datafile(os.path.join(DATA_DIR, image_name + ".gen.json"), new_np_array)
+    print(pf.format("Fullført! Sjekk \"fourier_bilder\" mappen for oppdateringer!", pf.BOLD))
 
 def run():
     if(GENERATE_PIECEWISE_BOOL):
