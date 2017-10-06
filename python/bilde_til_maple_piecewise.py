@@ -161,13 +161,13 @@ def values_to_image_array_metode3(value_array):
 
 #####################################################################################################
 # Velg om du vil generere piecewise for maple eller lage et bilde fra psi(t) funksjonen.
-GENERATE_PIECEWISE_BOOL = True
+GENERATE_PIECEWISE_BOOL = False
 
 # Velg perioden til piecewise-kommandoen. Det vi har brukt før er 64
 PERIODE = 64
 
 # Velg indeksene for 8x8 blokken dere vil analysere! 0, 0 er den blokken øverst til venstre.
-BLOCK_INDEXES = ( 11, 40 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
+BLOCK_INDEXES = ( 30, 40 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
 
 # Skriv inn navnet på bildefilen. NB! Filen må ligge i mappen "fourier_bilder"
 IMAGE_NAME = "natural.jpg"
@@ -180,7 +180,7 @@ METHOD = image_array_to_values_metode3; REVERSE_METODE = values_to_image_array_m
 # Her skrive man inn cosinusuttrykket fra maple! Sørg for at det ser riktig ut og at verdien fra cosinusuttrykket blir returnert fra funksjonen
 # Bytt ut "255*cos(.4*t)" med det som kommer ut fra maple!
 def psi(t):
-    return 82.25000000+5.347200089*cos(0.4908738522e-1*t)+.9202386083*cos(0.9817477044e-1*t)+1.790431318*cos(.1472621557*t)-.3520397149*cos(.1963495409*t)+.5905164993*cos(.2454369261*t)-.6293320425*cos(.2945243113*t)-1.328080712*cos(.3436116965*t)+.5967475725*cos(.3926990818*t)+3.918796924*cos(.4417864670*t)+.2762796170*cos(.4908738522*t)-3.814886576*cos(.5399612374*t)-1.560967673*cos(.5890486226*t)-2.721505320*cos(.6381360078*t)-.4159046152*cos(.6872233931*t)+.3339708878*cos(.7363107783*t)+1.173182086*cos(.7853981635*t)+1.818496590*cos(.8344855487*t)+.4404963292*cos(.8835729339*t)+1.584845314*cos(.9326603192*t)+1.158538469*cos(.9817477044*t)
+    return 207.5000000+16.62215642*cos(0.4908738522e-1*t)+1.608993164*cos(0.9817477044e-1*t)+1.224230802*cos(.1472621557*t)+0.102791300e-1*cos(.1963495409*t)+2.047492789*cos(.2454369261*t)+.8024390872*cos(.2945243113*t)-.9786069685*cos(.3436116965*t)-2.027723452*cos(.3926990818*t)+5.958928341*cos(.4417864670*t)-1.463803885*cos(.4908738522*t)-4.317655497*cos(.5399612374*t)+3.874737238*cos(.5890486226*t)-2.117979905*cos(.6381360078*t)-.4176889101*cos(.6872233931*t)+1.620391146*cos(.7363107783*t)-1.014027093*cos(.7853981635*t)+2.117146310*cos(.8344855487*t)-3.232560805*cos(.8835729339*t)+2.983737454*cos(.9326603192*t)-.1423950458*cos(.9817477044*t)
 
 ####################################################################################################
 
@@ -245,6 +245,11 @@ def numpyarray_to_image(np_array, filepath):
     with open(filepath, 'wb') as image_file:
         new_image.save(image_file, 'PNG')
 
+def numpyarray_to_image_scale(np_array, filepath, scalefactor):
+    new_image = Image.fromarray(np_array,'L')
+    with open(filepath, 'wb') as image_file:
+        new_image.save(image_file, 'PNG')
+
 # Gjør om en bildefil til en 2d array med pikselverdier (bare sort/hvitt)
 def image_to_numpyarray(loaded_image):
     converted_image_file = loaded_image.convert('L')
@@ -284,7 +289,6 @@ def array_to_piecewise(array, periode):
         roffset += increment
     res = res.strip().strip(',')
     return res + ")"
-
 
 # En funksjon som brukes tichange_to_fourierseriesvaluesl testing av et lite bilde
 def test_main():
