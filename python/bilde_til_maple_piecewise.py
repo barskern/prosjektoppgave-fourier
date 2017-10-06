@@ -161,13 +161,13 @@ def values_to_image_array_metode3(value_array):
 
 #####################################################################################################
 # Velg om du vil generere piecewise for maple eller lage et bilde fra psi(t) funksjonen.
-GENERATE_PIECEWISE_BOOL = False
+GENERATE_PIECEWISE_BOOL = True
 
 # Velg perioden til piecewise-kommandoen. Det vi har brukt før er 64
 PERIODE = 64
 
 # Velg indeksene for 8x8 blokken dere vil analysere! 0, 0 er den blokken øverst til venstre.
-BLOCK_INDEXES = ( 11, 0 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
+BLOCK_INDEXES = ( 11, 40 ) # VELG HVILKEN BLOKK AV 8x8 DERE VIL UNDERSØKE. (x, y)
 
 # Skriv inn navnet på bildefilen. NB! Filen må ligge i mappen "fourier_bilder"
 IMAGE_NAME = "natural.jpg"
