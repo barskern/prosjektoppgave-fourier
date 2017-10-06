@@ -176,13 +176,17 @@ IMAGE_NAME = "kunstig.png"
 
 # Endre denne variabelen til metoden dere ønsker. Fjern hastaggen foran metoden dere ønsker og putt en hastag forran alle metodene dere ikke vil bruke
 #METHOD = image_array_to_values_metode1; REVERSE_METODE = values_to_image_array_metode1; METHOD_NAME = "metode1"
-#METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2; METHOD_NAME = "metode2"
-METHOD = image_array_to_values_metode3; REVERSE_METODE = values_to_image_array_metode3; METHOD_NAME = "metode3"
+METHOD = image_array_to_values_metode2; REVERSE_METODE = values_to_image_array_metode2; METHOD_NAME = "metode2"
+#METHOD = image_array_to_values_metode3; REVERSE_METODE = values_to_image_array_metode3; METHOD_NAME = "metode3"
 
 # Her skrive man inn cosinusuttrykket fra maple! Sørg for at det ser riktig ut og at verdien fra cosinusuttrykket blir returnert fra funksjonen
 # Bytt ut "255*cos(.4*t)" med det som kommer ut fra maple!
 def psi(t):
+<<<<<<< HEAD
     return 87.31250000-3.566504710*cos(.1472621557*t)+141.0276691*cos(0.4908738522e-1*t)+.985911939*cos(.2945243113*t)-30.20040468*cos(.1963495409*t)-19.82176616*cos(.2454369261*t)+64.69265187*cos(0.9817477044e-1*t)-5.785914227*cos(.4908738522*t)+11.87593921*cos(.3436116965*t)+9.888450648*cos(.3926990818*t)+1.725469068*cos(.4417864670*t)-8.730228779*cos(.8344855487*t)-8.052902122*cos(.5399612374*t)-3.278710526*cos(.5890486226*t)+4.938007688*cos(.6381360078*t)-5.852056005*cos(.7853981635*t)-2.248346107*cos(.8835729339*t)+6.159973590*cos(.9326603192*t)+7.475453779*cos(.9817477044*t)+8.610305090*cos(.6872233931*t)+3.258151057*cos(.7363107783*t)+1.287146206*cos(1.030835090*t)-4.999438596*cos(1.079922475*t)-5.420052033*cos(1.129009860*t)-3.142672782*cos(1.423534171*t)-2.335600308*cos(1.472621557*t)+3.729066048*cos(1.276272016*t)-1.094383682*cos(1.178097245*t)+2.971808007*cos(1.227184630*t)+1.643479624*cos(1.325359401*t)-1.312866830*cos(1.374446786*t)
+=======
+    return 87.31250000-26.28139678*cos(.6872233931*t)-.558105397*cos(.6381360078*t)-.4429782361*cos(.5890486226*t)-9.727022590*cos(.5399612374*t)+35.73977026*cos(.4417864670*t)-23.77173001*cos(.4908738522*t)-.2758849375*cos(1.276272016*t)+14.43287478*cos(1.325359401*t)+94.78152004*cos(.3926990818*t)-5.178799325*cos(1.374446786*t)+7.848280087*cos(1.472621557*t)-2.032607729*cos(1.423534171*t)+94.76072592*cos(0.4908738522e-1*t)+7.59868663*cos(0.9817477044e-1*t)+2.820123666*cos(.1472621557*t)+31.59389714*cos(.3436116965*t)-17.08111621*cos(.2945243113*t)-2.833511842*cos(.2454369261*t)+3.628188064*cos(.1963495409*t)-27.53698704*cos(.7363107783*t)+6.488675826*cos(.7853981635*t)-16.34303864*cos(.8344855487*t)-26.89808731*cos(.8835729339*t)+9.868053260*cos(.9817477044*t)+4.170214808*cos(.9326603192*t)+18.53256178*cos(1.030835090*t)+9.288161939*cos(1.079922475*t)-8.128108834*cos(1.129009860*t)+4.725676731*cos(1.178097245*t)-2.928708739*cos(1.227184630*t)
+>>>>>>> 1e3afea5121ecbf8736f629d3eeb9b2b36497a78
 
 ####################################################################################################
 
