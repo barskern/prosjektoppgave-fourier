@@ -1,0 +1,5 @@
+Prosjektet har gitt en grunnleggende innføring i hva fourierrekker er, og sett på typiske anvendelser hvor fourierrekker blir benyttet. 
+Fourierrekker gjør det blant annet mulig å lagre data med mindre plass, samtidig som det ikke fører til at betydelig mengder data går tapt i prosessen.
+Ved å omgjøre et bildet til en fourierrekke ble det vist hvordan en fourierrekke kan inneholde data,
+som senere ble brukt til å bygge opp et bilde som var tilnærmet likt det opprinnelige bildet.
+Fourierrekken sparte også brukeren for betydelige mengder data, i forhold til hva man trenger for å lagre det originale bildet. 
