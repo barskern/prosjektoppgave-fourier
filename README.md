@@ -45,8 +45,8 @@ Uferdig: &#10008;, Ferdig: &#10004;
 2. Innholdsfortegnelse &#10004;
 3. Introduksjon &#10004;
 4. Grunnleggende om Fourierrekker &#10004;
-5. Noen anvendelser av Fourierrekker (kort med noen eksempler) &#10008;
-6. JPEG og Fourier &#10008;
+5. Noen anvendelser av Fourierrekker (kort med noen eksempler) &#10004;
+6. JPEG og Fourier &#10004;
     - Introduksjon
         - Introdusere at vi skal fremvise et bilde som en fourierrekke
         - Introdusere JPEG
@@ -58,8 +58,8 @@ Uferdig: &#10008;, Ferdig: &#10004;
         - DCT vs DFT
     - Framstilling
     - Konklusjon - Forklaring
-7. Oppsummering &#10008;
-8. Referanser &#10008;
+7. Oppsummering &#10004;
+8. Referanser &#10004;
 
 #### Organisering i **maple**-mappen
 
